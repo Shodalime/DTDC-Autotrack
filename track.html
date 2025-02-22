@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTDC Auto-Track</title>
+    <script>
+        window.onload = async function() {
+            try {
+                // Read AWB number from clipboard
+                const awb = await navigator.clipboard.readText();
+                
+                // Store AWB in sessionStorage for Tampermonkey script
+                sessionStorage.setItem("awbNumber", awb);
+
+                // Open DTDC tracking page in a new tab
+                window.open("https://www.dtdc.in/trace.asp", "_blank");
+
+                // Show success message
+                document.body.innerHTML = "<h2>DTDC Tracking Opened. Auto-filling AWB...</h2>";
+
+            } catch (error) {
+                alert("Clipboard access blocked! Please allow clipboard permissions.");
+            }
+        };
+    </script>
+</head>
+<body>
+    <h2>Redirecting to DTDC Tracking...</h2>
+</body>
+</html>
