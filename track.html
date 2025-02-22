@@ -9,18 +9,20 @@
             try {
                 // Read AWB number from clipboard
                 const awb = await navigator.clipboard.readText();
-                
+
+                if (!awb){
+                    alert("No AWB number found in clipboard! Copy it first.");
+                }
                 // Store AWB in sessionStorage for Tampermonkey script
                 sessionStorage.setItem("awbNumber", awb);
+                console.log("AWB Number Stored:",awb);
 
-                // Open DTDC tracking page in a new tab
-                window.open("https://www.dtdc.in/trace.asp", "_blank");
-
-                // Show success message
-                document.body.innerHTML = "<h2>DTDC Tracking Opened. Auto-filling AWB...</h2>";
+                const dtdcURL="https://www.dtdc.in/trace.asp";
+                window.location.href = dtdcURL;
 
             } catch (error) {
                 alert("Clipboard access blocked! Please allow clipboard permissions.");
+                console.error("Clipboard Error",error);
             }
         };
     </script>
