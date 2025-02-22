@@ -17,9 +17,9 @@
                     return;
                 }
 
-                // Store AWB in sessionStorage
-                sessionStorage.setItem("awbNumber", awb);
-                console.log("AWB stored:", awb);
+                // Store AWB in localStorage (persists across pages)
+                localStorage.setItem("awbNumber", awb);
+                console.log("AWB stored in localStorage:", awb);
 
                 // Redirect to DTDC tracking page
                 window.location.href = "https://www.dtdc.in/trace.asp";
