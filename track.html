@@ -21,6 +21,9 @@
                 localStorage.setItem("awbNumber", awb);
                 console.log("AWB stored in localStorage:", awb);
 
+                // DEBUG: Check if AWB is correctly saved
+                console.log("Verify AWB in localStorage:", localStorage.getItem("awbNumber"));
+                
                 // Redirect to DTDC tracking page
                 window.location.href = "https://www.dtdc.in/trace.asp";
 
