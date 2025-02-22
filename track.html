@@ -5,29 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DTDC Auto-Track</title>
     <script>
-        window.onload = async function() {
+        async function fetchAWB() {
             try {
+                console.log("Requesting clipboard access...");
+
                 // Read AWB number from clipboard
                 const awb = await navigator.clipboard.readText();
 
-                if (!awb){
-                    alert("No AWB number found in clipboard! Copy it first.");
+                if (!awb) {
+                    alert("Clipboard is empty! Copy your AWB number first.");
+                    return;
                 }
-                // Store AWB in sessionStorage for Tampermonkey script
-                sessionStorage.setItem("awbNumber", awb);
-                console.log("AWB Number Stored:",awb);
 
-                const dtdcURL="https://www.dtdc.in/trace.asp";
-                window.location.href = dtdcURL;
+                // Store AWB in sessionStorage
+                sessionStorage.setItem("awbNumber", awb);
+                console.log("AWB stored:", awb);
+
+                // Redirect to DTDC tracking page
+                window.location.href = "https://www.dtdc.in/tracking/";
 
             } catch (error) {
-                alert("Clipboard access blocked! Please allow clipboard permissions.");
-                console.error("Clipboard Error",error);
+                alert("Clipboard access blocked! Click inside the page and try again.");
+                console.error("Clipboard error:", error);
             }
-        };
+        }
     </script>
 </head>
 <body>
-    <h2>Redirecting to DTDC Tracking...</h2>
+    <h2>Click the button below to open DTDC Tracking:</h2>
+    <button onclick="fetchAWB()">Open DTDC Tracking</button>
 </body>
 </html>
